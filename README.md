@@ -24,7 +24,7 @@ for every new employee in Saudi HRMS implementations.
 
 ```bash
 # 1. Get the app
-bench get-app sa_hr_onboarding https://github.com/yourcompany/sa_hr_onboarding
+bench get-app https://github.com/Neoadmin23/sa_hr_onboarding_app.git
 
 # 2. Install on your site
 bench --site your-site.com install-app sa_hr_onboarding
