@@ -1,0 +1,261 @@
+{
+  "actions": [],
+  "allow_rename": 1,
+  "autoname": "field:template_name",
+  "creation": "2024-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "template_name",
+    "is_active",
+    "column_break_0",
+    "priority",
+    "section_break_criteria",
+    "employment_type",
+    "department",
+    "column_break_criteria",
+    "grade",
+    "nationality_type",
+    "section_break_leave",
+    "leave_policy",
+    "leave_period",
+    "column_break_leave",
+    "holiday_list",
+    "section_break_shift",
+    "default_shift",
+    "shift_location",
+    "column_break_shift",
+    "shift_request_approver",
+    "section_break_salary",
+    "salary_structure",
+    "salary_currency",
+    "column_break_salary",
+    "payroll_cost_center",
+    "section_break_gosi",
+    "apply_gosi",
+    "gosi_type",
+    "column_break_gosi",
+    "gosi_percentage",
+    "section_break_notes",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "template_name",
+      "fieldtype": "Data",
+      "label": "Template Name",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "default": "1",
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "column_break_0",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Int",
+      "label": "Priority (Lower = Higher Priority)",
+      "default": "10",
+      "description": "When multiple templates match, the one with lowest number wins"
+    },
+    {
+      "fieldname": "section_break_criteria",
+      "fieldtype": "Section Break",
+      "label": "Matching Criteria"
+    },
+    {
+      "fieldname": "employment_type",
+      "fieldtype": "Link",
+      "label": "Employment Type",
+      "options": "Employment Type",
+      "in_list_view": 1,
+      "description": "Leave blank to match all employment types"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department",
+      "in_list_view": 1,
+      "description": "Leave blank to match all departments"
+    },
+    {
+      "fieldname": "column_break_criteria",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "grade",
+      "fieldtype": "Link",
+      "label": "Employee Grade",
+      "options": "Employee Grade",
+      "description": "Leave blank to match all grades"
+    },
+    {
+      "fieldname": "nationality_type",
+      "fieldtype": "Select",
+      "label": "Nationality Type",
+      "options": "\nSaudi\nNon-Saudi\nAll",
+      "default": "All",
+      "description": "Apply this template to Saudi, Non-Saudi, or All employees"
+    },
+    {
+      "fieldname": "section_break_leave",
+      "fieldtype": "Section Break",
+      "label": "Leave Configuration"
+    },
+    {
+      "fieldname": "leave_policy",
+      "fieldtype": "Link",
+      "label": "Leave Policy",
+      "options": "Leave Policy"
+    },
+    {
+      "fieldname": "leave_period",
+      "fieldtype": "Link",
+      "label": "Leave Period",
+      "options": "Leave Period"
+    },
+    {
+      "fieldname": "column_break_leave",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "holiday_list",
+      "fieldtype": "Link",
+      "label": "Holiday List",
+      "options": "Holiday List"
+    },
+    {
+      "fieldname": "section_break_shift",
+      "fieldtype": "Section Break",
+      "label": "Shift Configuration"
+    },
+    {
+      "fieldname": "default_shift",
+      "fieldtype": "Link",
+      "label": "Default Shift",
+      "options": "Shift Type"
+    },
+    {
+      "fieldname": "shift_location",
+      "fieldtype": "Link",
+      "label": "Shift Location",
+      "options": "Location"
+    },
+    {
+      "fieldname": "column_break_shift",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "shift_request_approver",
+      "fieldtype": "Link",
+      "label": "Default Shift Approver",
+      "options": "User"
+    },
+    {
+      "fieldname": "section_break_salary",
+      "fieldtype": "Section Break",
+      "label": "Salary Configuration"
+    },
+    {
+      "fieldname": "salary_structure",
+      "fieldtype": "Link",
+      "label": "Salary Structure",
+      "options": "Salary Structure"
+    },
+    {
+      "fieldname": "salary_currency",
+      "fieldtype": "Link",
+      "label": "Salary Currency",
+      "options": "Currency",
+      "default": "SAR"
+    },
+    {
+      "fieldname": "column_break_salary",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payroll_cost_center",
+      "fieldtype": "Link",
+      "label": "Payroll Cost Center",
+      "options": "Cost Center"
+    },
+    {
+      "fieldname": "section_break_gosi",
+      "fieldtype": "Section Break",
+      "label": "GOSI Configuration"
+    },
+    {
+      "fieldname": "apply_gosi",
+      "fieldtype": "Check",
+      "label": "Apply GOSI",
+      "default": "1"
+    },
+    {
+      "fieldname": "gosi_type",
+      "fieldtype": "Select",
+      "label": "GOSI Type",
+      "options": "Saudi Employee\nNon-Saudi Employee\nNot Applicable",
+      "depends_on": "apply_gosi"
+    },
+    {
+      "fieldname": "column_break_gosi",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "gosi_percentage",
+      "fieldtype": "Float",
+      "label": "Employee GOSI %",
+      "default": "10",
+      "description": "Saudi = 10%, Non-Saudi = 2%",
+      "depends_on": "apply_gosi"
+    },
+    {
+      "fieldname": "section_break_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes / Description"
+    }
+  ],
+  "links": [],
+  "modified": "2024-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "SA HR Onboarding",
+  "name": "HR Onboarding Template",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "HR Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "read": 1,
+      "role": "HR User"
+    }
+  ],
+  "sort_field": "priority",
+  "sort_order": "ASC",
+  "title_field": "template_name",
+  "track_changes": 1
+}

@@ -1,0 +1,113 @@
+{
+  "doctype": "Workflow",
+  "name": "Employee Onboarding Approval",
+  "document_type": "Employee",
+  "is_active": 1,
+  "workflow_name": "Employee Onboarding Approval",
+  "send_email_alert": 1,
+  "override_status": 0,
+  "workflow_state_field": "workflow_state",
+  "states": [
+    {
+      "state": "Draft",
+      "doc_status": "0",
+      "allow_edit": "HR User",
+      "is_optional_state": 0,
+      "next_action_email_template": "",
+      "message": ""
+    },
+    {
+      "state": "Pending HR Review",
+      "doc_status": "0",
+      "allow_edit": "HR Manager",
+      "is_optional_state": 0,
+      "next_action_email_template": "HR Review Required",
+      "message": "Employee record has been submitted for HR review."
+    },
+    {
+      "state": "Pending Manager Approval",
+      "doc_status": "0",
+      "allow_edit": "HR Manager",
+      "is_optional_state": 0,
+      "next_action_email_template": "Manager Approval Required",
+      "message": "Employee record has been reviewed by HR and requires Department Manager approval."
+    },
+    {
+      "state": "Approved - Onboarding Triggered",
+      "doc_status": "1",
+      "allow_edit": "HR Manager",
+      "is_optional_state": 0,
+      "next_action_email_template": "Onboarding Complete",
+      "message": "Employee has been approved. Auto-onboarding has been triggered."
+    },
+    {
+      "state": "Rejected",
+      "doc_status": "0",
+      "allow_edit": "HR Manager",
+      "is_optional_state": 0,
+      "next_action_email_template": "",
+      "message": "Employee record has been rejected. Please review and resubmit."
+    }
+  ],
+  "transitions": [
+    {
+      "state": "Draft",
+      "action": "Submit for HR Review",
+      "next_state": "Pending HR Review",
+      "allowed": "HR User",
+      "allow_self_approval": 0,
+      "condition": "doc.employment_type and doc.department and doc.date_of_joining",
+      "condition_message": "Employment Type, Department, and Date of Joining are required before submission."
+    },
+    {
+      "state": "Pending HR Review",
+      "action": "HR Reviewed - Send to Manager",
+      "next_state": "Pending Manager Approval",
+      "allowed": "HR Manager",
+      "allow_self_approval": 1,
+      "condition": "doc.ctc",
+      "condition_message": "CTC (Cost to Company) must be set before sending for manager approval."
+    },
+    {
+      "state": "Pending HR Review",
+      "action": "Reject",
+      "next_state": "Rejected",
+      "allowed": "HR Manager",
+      "allow_self_approval": 1,
+      "condition": ""
+    },
+    {
+      "state": "Pending Manager Approval",
+      "action": "Approve & Trigger Onboarding",
+      "next_state": "Approved - Onboarding Triggered",
+      "allowed": "HR Manager",
+      "allow_self_approval": 1,
+      "condition": "",
+      "condition_message": ""
+    },
+    {
+      "state": "Pending Manager Approval",
+      "action": "Send Back to HR",
+      "next_state": "Pending HR Review",
+      "allowed": "HR Manager",
+      "allow_self_approval": 1,
+      "condition": ""
+    },
+    {
+      "state": "Rejected",
+      "action": "Resubmit",
+      "next_state": "Draft",
+      "allowed": "HR User",
+      "allow_self_approval": 1,
+      "condition": ""
+    },
+    {
+      "state": "Approved - Onboarding Triggered",
+      "action": "Reset to HR Review",
+      "next_state": "Pending HR Review",
+      "allowed": "System Manager",
+      "allow_self_approval": 1,
+      "condition": ""
+    }
+  ]
+}
