@@ -21,17 +21,22 @@ from frappe.utils import today, getdate
 # ─────────────────────────────────────────────
 
 def auto_assign_all(doc, method):
-    """
-    Master function: finds matching onboarding template
-    and auto-assigns all HR configurations.
-    Only runs when employee status is Active and record is submitted/saved.
-    """
+    # Only run for Active employees
     if doc.status != "Active":
         return
 
-    # Only auto-assign for new employees or explicit trigger
-    if method == "on_update" and not doc.get("__run_onboarding"):
-        return
+    # For on_update, only run if it's a brand new employee
+    # (date_of_joining was just set = new hire) or manually triggered
+    if method == "on_update":
+        # Check if assignments already exist - if yes skip
+        already_has_leave = frappe.db.exists(
+            "Leave Policy Assignment", {"employee": doc.name, "docstatus": 1}
+        )
+        already_has_shift = frappe.db.exists(
+            "Shift Assignment", {"employee": doc.name, "docstatus": 1}
+        )
+        if already_has_leave and already_has_shift:
+            return  # Already fully onboarded, skip
 
     template = get_matching_template(doc)
     if not template:
